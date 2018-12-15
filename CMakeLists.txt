@@ -88,9 +88,6 @@ else(LINUX)
   find_package(ALSA)
   pkg_check_modules(DBUS dbus-1)
 endif(LINUX)
-if(ALSA_FOUND)
-  set(HAVE_ALSA ON)
-endif()
 if (NOT APPLE)
   find_package(X11)
 endif()
@@ -191,28 +188,6 @@ else()
   set(HAVE_TAGLIB_DSFFILE ON)
 endif()
 
-# LASTFM
-find_library(LASTFM5_LIBRARIES lastfm5)
-find_path(LASTFM5_INCLUDE_DIRS lastfm5/ws.h)
-find_path(LASTFM51_INCLUDE_DIRS lastfm5/Track.h)
-if(LASTFM5_INCLUDE_DIRS AND LASTFM51_INCLUDE_DIRS)
-  set(HAVE_LIBLASTFM1 ON)
-endif()
-
-# Use system sha2 if it's available
-find_path(SHA2_INCLUDE_DIRS sha2.h)
-find_library(SHA2_LIBRARIES sha2)
-if (SHA2_LIBRARIES AND SHA2_INCLUDE_DIRS)
-  message(STATUS "Using system sha2 library")
-  set(USE_SYSTEM_SHA2 ON)
-else()
-  message(STATUS "Using builtin sha2 library")
-  set(USE_SYSTEM_SHA2 OFF)
-  add_subdirectory(3rdparty/sha2)
-  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
-  set(SHA2_LIBRARIES sha2)
-endif()
-
 # Use system QtSingleApplication only if explicitly enabled.
 option(USE_SYSTEM_QTSINGLEAPPLICATION "Use system QtSingleApplication library" OFF)
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
@@ -269,6 +244,14 @@ if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
 endif(WIN32)
 
+optional_component(ALSA ON "ALSA integration"
+  DEPENDS "alsa" ALSA_FOUND
+)
+
+optional_component(LIBPULSE ON "Pulse audio integration"
+  DEPENDS "libpulse" LIBPULSE_FOUND
+)
+
 optional_component(DBUS ON "D-Bus support"
   DEPENDS "D-Bus" DBUS_FOUND
 )
@@ -304,14 +287,6 @@ else ()
     DEPENDS "libpulse" LIBPULSE_FOUND
   )
 endif()
-
-optional_component(LIBPULSE ON "Pulse audio integration"
-  DEPENDS "libpulse" LIBPULSE_FOUND
-)
-
-optional_component(LIBLASTFM ON "Last.fm album cover provider"
-  DEPENDS "liblastfm" LASTFM5_LIBRARIES LASTFM5_INCLUDE_DIRS
-)
 
 optional_component(CHROMAPRINT ON "Chromaprint support / Tag fetching from Musicbrainz"
   DEPENDS "chromaprint" CHROMAPRINT_FOUND
@@ -355,7 +330,12 @@ optional_component(SPARKLE ON "Sparkle integration"
 )
 
 optional_component(STREAM_TIDAL ON "Streaming: Tidal support")
-optional_component(STREAM_DEEZER ON "Streaming: Deezer support")
+
+if (LIBDZMEDIA_FOUND OR LIBDEEZER_FOUND)
+  optional_component(STREAM_DEEZER ON "Streaming: Deezer support")
+else()
+  optional_component(STREAM_DEEZER OFF "Streaming: Deezer support")
+endif()
 
 optional_component(DZMEDIA ON "DZMedia"
   DEPENDS "libdzmedia" LIBDZMEDIA_FOUND

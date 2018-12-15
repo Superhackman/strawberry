@@ -71,7 +71,9 @@ About::About(QWidget *parent):QDialog(parent) {
            << Person("Tyler Rhodes", "tyler.s.rhodes@gmail.com")
            << Person("Vikram Ambrose", "ambroseworks@gmail.com")
            << Person("David Guillen", "david@davidgf.net")
-           << Person("Krzysztof Sobiecki", "sobkas@gmail.com");
+           << Person("Krzysztof Sobiecki", "sobkas@gmail.com")
+           << Person("Valeriy Malov", "jazzvoid@gmail.com")
+           << Person("Nick Lanham", "nick@afternight.org");
 
   QString Title("About Strawberry");
 
@@ -99,8 +101,8 @@ QString About::MainHtml() const {
 
   ret += QString("<p>");
   ret += QString("Strawberry is a audio player and music collection organizer.<br />");
-  ret += QString("It's based on Clementine and Amarok 1.4, especially aimed at audiophiles.<br />");
-  ret += QString("The name is inspired by the band Strawbs.");
+  ret += QString("It is a fork of Clementine released in 2018 aimed at music collectors, audio enthusiasts and audiophiles.<br />");
+  ret += QString("The name is inspired by the band Strawbs. It's based on a heavily modified version of Clementine created in 2012-2013. It's written in C++ and Qt 5.");
   ret += QString("</p>");
   //ret += QString("<p>Website: <a href=\"http://www.strawbs.org/licenses/\">http://www.strawbs.org/</a></p>");
   ret += QString("<p>");
@@ -138,7 +140,7 @@ QString About::ContributorsHtml() const {
   }
   ret += QString("</p>");
 
-  ret += QString("<p><b>Contributors</b>");
+  ret += QString("<p><b>Clementine Contributors</b>");
   for (const Person &person : constributors_) {
     ret += "<br />" + PersonToHtml(person);
   }

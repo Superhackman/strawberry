@@ -1,13 +1,13 @@
 :strawberry: Strawberry Music Player [![Build Status](https://travis-ci.org/jonaski/strawberry.svg?branch=master)](https://travis-ci.org/jonaski/strawberry)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FRJUYV5QP6HW8)
 =======================
 
-Strawberry is a audio player and music collection organizer. It is a fork of Clementine created in 2013 with a diffrent goal.
-It's written in C++ and Qt 5. The name is inspired by the band Strawbs.
+Strawberry is a audio player and music collection organizer. It is a fork of Clementine released in 2018 aimed at music collectors, audio enthusiasts and audiophiles. The name is inspired by the band Strawbs. It's based on a heavily modified version of Clementine created in 2012-2013. It's written in C++ and Qt 5.
 
-  * Website: http://www.strawbs.org/
+  * Website: https://www.strawbs.org/
   * Github: https://github.com/jonaski/strawberry
   * Buildbot: http://buildbot.strawbs.net/
-  * Latest builds: http://builds.strawbs.org/
+  * Latest builds: https://builds.strawbs.org/
 
 ### :heavy_check_mark: Features:
 
@@ -16,7 +16,7 @@ It's written in C++ and Qt 5. The name is inspired by the band Strawbs.
   * Audio CD playback
   * Native desktop notifications
   * Playlists in multiple formats
-  * Advanced output and device options with support for bit perfect playback on Linux
+  * Advanced audio output and device configuration for bit-perfect playback on Linux
   * Edit tags on music files
   * Fetch tags from MusicBrainz
   * Album cover art from Last.fm, Musicbrainz and Discogs
@@ -57,7 +57,6 @@ Deezer SDK can be found here: https://build-repo.deezer.com/native_sdk/deezer-na
 
 Optional:
 
-* The Qt 5 LastFM library is required for fetching album covers from LastFM.
 * [libcdio](https://www.gnu.org/software/libcdio/) - To enable Audio CD support
 * [libmtp](http://libmtp.sourceforge.net/) - MTP support.
 * [libgpod](http://www.gtkpod.org/libgpod/) - iPod Classic support.
@@ -82,3 +81,7 @@ Optional:
 
 
 ![Browse](https://www.strawbs.org/pictures/screenshot-002-large.png)
+
+### :moneybag: Donate
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FRJUYV5QP6HW8)

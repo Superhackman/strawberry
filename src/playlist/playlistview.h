@@ -99,7 +99,6 @@ class PlaylistView : public QTreeView {
   PlaylistView(QWidget *parent = nullptr);
   ~PlaylistView();
 
-  static const int kStateVersion;
   // Constants for settings: are persistent, values should not be changed
   static const char *kSettingBackgroundImageType;
   static const char *kSettingBackgroundImageFilename;
@@ -124,6 +123,8 @@ class PlaylistView : public QTreeView {
   void drawTree(QPainter *painter, const QRegion &region) const;
   void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
   void setModel(QAbstractItemModel *model);
+
+  void ResetColumns();
 
  public slots:
   void ReloadSettings();
@@ -214,8 +215,8 @@ class PlaylistView : public QTreeView {
   PlaylistProxyStyle *style_;
   Playlist *playlist_;
   PlaylistHeader *header_;
+  bool initialized_;
   bool setting_initial_header_layout_;
-  bool upgrading_from_qheaderview_;
   bool read_only_settings_;
   bool header_loaded_;
 

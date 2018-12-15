@@ -67,13 +67,8 @@ endif()
 link_directories(${TAGLIB_LIBRARY_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
 
-include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
-
-if(HAVE_LIBLASTFM)
-  include_directories(${LASTFM5_INCLUDE_DIRS})
-endif(HAVE_LIBLASTFM)
 
 include_directories(${CMAKE_SOURCE_DIR}/ext/libstrawberry-common)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libstrawberry-tagreader)
@@ -196,6 +191,7 @@ set(SOURCES
   covermanager/coverexportrunnable.cpp
   covermanager/currentartloader.cpp
   covermanager/coverfromurldialog.cpp
+  covermanager/lastfmcoverprovider.cpp
   covermanager/musicbrainzcoverprovider.cpp
   covermanager/discogscoverprovider.cpp
 
@@ -361,6 +357,7 @@ set(HEADERS
   covermanager/coverexportrunnable.h
   covermanager/currentartloader.h
   covermanager/coverfromurldialog.h
+  covermanager/lastfmcoverprovider.h
   covermanager/musicbrainzcoverprovider.h
   covermanager/discogscoverprovider.h
 
@@ -528,15 +525,6 @@ optional_source(HAVE_PHONON
 optional_source(HAVE_DEEZER
   SOURCES engine/deezerengine.cpp
   HEADERS engine/deezerengine.h
-)
-
-# Lastfm
-optional_source(HAVE_LIBLASTFM
-  SOURCES
-    covermanager/lastfmcoverprovider.cpp
-    covermanager/lastfmcompat.cpp
-  HEADERS
-    covermanager/lastfmcoverprovider.h
 )
 
 # DBUS and MPRIS - Unix specific
@@ -906,7 +894,6 @@ target_link_libraries(strawberry_lib
   libstrawberry-tagreader
   ${GLIB_LIBRARIES}
   ${GIO_LIBRARIES}
-  ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${QT_LIBRARIES}
@@ -946,10 +933,6 @@ endif()
 if(HAVE_DZMEDIA)
   target_link_libraries(strawberry_lib ${LIBDZMEDIA_LIBRARIES})
 endif()
-
-if(HAVE_LIBLASTFM)
-  target_link_libraries(strawberry_lib ${LASTFM5_LIBRARIES})
-endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)
   target_link_libraries(strawberry_lib ${LIBGPOD_LIBRARIES})
